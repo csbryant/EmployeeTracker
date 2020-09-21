@@ -11,14 +11,15 @@ const connection = mysql.createConnection({
     // Your username
     user: "root",
   
-    // Your password
+    // Insert password here
     password: "",
-    database: "boston"
+    database: "employees_DB"
   });
   
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
+    mainMenu();
 });
 
 
@@ -31,15 +32,26 @@ function mainMenu() {
             "View all employees",
             "View all employees by Department",
             "View all employees by Manager",
-            "Add Employye",
-            "Add Employye Role",
-            "Add Employye Manager",
+            "Add Employee",
+            "Add Employee Role",
+            "Add Employee Manager",
             "View All Roles",
             "Exit"
         ]
     }).then(function(answer) {
         if (answer.menu === "Exit"){
             connection.end();
+        } else if (answer.menu === "View all employees"){
+            viewAll();
         }
     })
+}
+
+function viewAll() {
+let query = "SELECT * FROM EMPLOYEE"
+connection.query(query, function(err, res) {
+    if (err) return(err);
+    console.table(res);
+    mainMenu();
+})
 }
