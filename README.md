@@ -11,4 +11,4 @@ The user will be able be able to view all employees including who their managers
 
 # Credits
 
-Uses MySql for database/NPM and Inquirer for the CLI.
+Uses MySql for database/NPM, Inquirer for the CLI, and Console.Table to display the information as a table in console.
